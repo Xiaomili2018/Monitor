@@ -9,13 +9,17 @@
  */
 
 import React from 'react';
-import {View, Text, StyleSheet, AsyncStorage} from 'react-native';
+import {Text, StyleSheet, AsyncStorage, ImageBackground} from 'react-native';
 import Constant from '../constant/Constant';
+
+const DelayTime = 1000;
 
 export default class Welcome extends React.Component {
     constructor(props) {
         super(props);
-        // this._checkAuthentication();
+        this.state = {
+            downCountNum: DelayTime / 1000,
+        };
     }
 
     //根据token检查用户是否登录，决定跳转到哪个界面
@@ -24,23 +28,52 @@ export default class Welcome extends React.Component {
         this.props.navigation.navigate(userToken ? 'App' : 'Auth');
     };
 
+    componentDidMount() {
+        this.timer = setTimeout(() => {
+            this._checkAuthentication();
+        }, DelayTime);
+
+        this.downCountTimer = setInterval(() => {
+            this.setState({
+                downCountNum: this.downCountTimer <= 0 ? 0 : this.downCountTimer--,
+            });
+        }, 1000);
+    }
+
+    componentWillUnmount() {
+        this.timer && clearTimeout(this.timer);
+        this.downCountTimer && clearInterval(this.downCountTimer);
+    }
 
     render() {
         return (
-            <View style={styles.container}>
-                <Text>
-                    这是欢迎页
-                </Text>
-            </View>
+            <ImageBackground
+                source={require('../static/img/loading.png')}
+                style={styles.background}>
+                <Text
+                    style={styles.text}
+                    onPress={() => {
+                        this._checkAuthentication();
+                        this.timer && clearTimeout(this.timer);
+                    }}
+                >跳过({this.state.downCountNum})</Text>
+            </ImageBackground>
         );
     }
 }
 
 
 const styles = StyleSheet.create({
-    container: {
-        backgroundColor: 'red',
+    background: {
+        flex: 1,
+        resizeMode: 'stretch',
     },
-    text: {},
+    text: {
+        marginTop: 30,
+        marginRight: 30,
+        fontSize: 13,
+        textAlign: 'right',
+        color: '#F08519',
+    },
 });
 

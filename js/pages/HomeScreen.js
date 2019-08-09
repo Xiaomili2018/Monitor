@@ -15,9 +15,7 @@ const SignInScreen = () => ({
     render() {
         return (
             <View style={styles.container}>
-                <Text>
-                    登录首页
-                </Text>
+                <Text>登录首页</Text>
             </View>
         );
     },
