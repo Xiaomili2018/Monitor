@@ -9,7 +9,7 @@
  */
 
 import React from 'react';
-import {View, Text, Image, TextInput, StyleSheet, Dimensions, Button} from 'react-native';
+import {View, Text, Image, TextInput, StyleSheet, Dimensions, TouchableOpacity} from 'react-native';
 
 const {width, height} = Dimensions.get('window');
 export default class SignInScreen extends React.Component {
@@ -36,7 +36,7 @@ export default class SignInScreen extends React.Component {
                             source={require('../static/img/lianxirentb.png')}
                         />
                         <TextInput
-                            style={{fontSize: 14}}
+                            style={styles.usernameInput}
                             placeholder={'请输入手机号'}
                             placeholderTextColor={{color: '#939399'}}
                         />
@@ -48,16 +48,21 @@ export default class SignInScreen extends React.Component {
                             source={require('../static/img/yanzheng.png')}
                         />
                         <TextInput
-                            style={{width: 100, fontSize: 14}}
+                            style={styles.passwordInput}
                             placeholder={'请输入验证码'}
                             placeholderTextColor={{color: '#939399'}}/>
-
-                        <Button
-                            title={'发送验证短信'}
-                            color={'#F08519'}
-
-                        />
+                        <TouchableOpacity activeOpacity={0.8}>
+                            <View style={styles.button}>
+                                <Text style={styles.buttonText}>发送验证短信</Text>
+                            </View>
+                        </TouchableOpacity>
                     </View>
+
+                    <TouchableOpacity activeOpacity={0.8}>
+                        <View style={styles.buttonLogin}>
+                            <Text style={styles.buttonLoginText}>登陆</Text>
+                        </View>
+                    </TouchableOpacity>
                 </View>
 
             </View>
@@ -99,8 +104,8 @@ const styles = StyleSheet.create({
         backgroundColor: '#FFF',
     },
     username: {
-        marginLeft: 35,
-        marginRight: 33,
+        marginLeft: 34,
+        marginRight: 34,
         marginTop: 37,
         height: 39,
         alignItems: 'center',
@@ -109,9 +114,13 @@ const styles = StyleSheet.create({
         borderStyle: 'solid',
         borderColor: '#E6E6E6',
     },
+    usernameInput: {
+        fontSize: 14,
+        color: '#313133',
+    },
     password: {
-        marginLeft: 35,
-        marginRight: 33,
+        marginLeft: 34,
+        marginRight: 34,
         marginTop: 9,
         alignContent: 'center',
         alignItems: 'center',
@@ -120,6 +129,35 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         borderStyle: 'solid',
         borderColor: '#E6E6E6',
+    },
+    passwordInput: {
+        width: 100,
+        fontSize: 14,
+        color: '#313133',
+    },
+    button: {
+        borderRadius: 3,
+        marginLeft: 50,
+        backgroundColor: '#F08519',
+        padding: 6,
+        height: 27,
+    },
+    buttonText: {
+        fontSize: 12,
+        color: '#FFF',
+    },
+    buttonLogin: {
+        height: 42,
+        marginLeft: 36,
+        marginRight: 36,
+        marginTop: 31,
+        backgroundColor: '#F08519',
+        borderRadius: 3,
+    },
+    buttonLoginText: {
+        fontSize: 16,
+        textAlign: 'center',
+        color: '#FFF',
     },
 });
 

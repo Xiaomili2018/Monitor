@@ -25,7 +25,8 @@ export default class Welcome extends React.Component {
     //根据token检查用户是否登录，决定跳转到哪个界面
     _checkAuthentication = async () => {
         const userToken = await AsyncStorage.getItem(Constant.userToken);
-        this.props.navigation.navigate(userToken ? 'App' : 'Auth');
+        // this.props.navigation.navigate(userToken ? 'App' : 'Auth');
+        this.props.navigation.navigate('Auth');
     };
 
     componentDidMount() {
