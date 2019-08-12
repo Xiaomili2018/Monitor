@@ -9,7 +9,8 @@
  */
 
 import React from 'react';
-import {Text, StyleSheet, AsyncStorage, ImageBackground} from 'react-native';
+import {Text, StyleSheet, ImageBackground} from 'react-native';
+import AsyncStorage from '@react-native-community/async-storage';
 import Constant from '../constant/Constant';
 
 const DelayTime = 1000;
